@@ -1,27 +1,29 @@
 import { create } from "zustand";
+import { useEffect } from "react"; // Added import
 
 const useThemeStore = create((set) => ({
-  theme: "light", // Default before hydration
+  theme: "light",
+  setTheme: (theme) => set({ theme }),
   toggleTheme: () =>
-    set((state) => {
-      const newTheme = state.theme === "light" ? "dark" : "light";
-      if (typeof window !== "undefined") {
-        document.documentElement.classList.toggle("dark", newTheme === "dark");
-        localStorage.setItem("theme", newTheme);
-      }
-      return { theme: newTheme };
-    }),
+    set((state) => ({
+      theme: state.theme === "light" ? "dark" : "light",
+    })),
 }));
 
-// ✅ Hydrate state from localStorage on mount
-export const useHydrateTheme = () => {
-  const setTheme = useThemeStore((state) => state.setTheme);
+// Apply theme to document
+export const useThemeEffect = () => {
+  const { theme, setTheme } = useThemeStore();
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedTheme = localStorage.getItem("theme") || "light";
-      setTheme(storedTheme);
-    }
-  }, []);
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+  }, [setTheme]); // Added setTheme to dependencies
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 };
 
 export default useThemeStore;
