@@ -4,11 +4,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { FaUser, FaEnvelope, FaComment } from "react-icons/fa";
 
 const ContactForm = () => {
-  const [captchaValue, setCaptchaValue] = useState(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   // Memoized reCAPTCHA execution to prevent unnecessary re-renders
@@ -55,8 +54,6 @@ const ContactForm = () => {
         toast.error("reCAPTCHA verification failed. Please try again.");
         return;
       }
-
-      setCaptchaValue(token);
 
       try {
         const response = await fetch("/api/contact", {

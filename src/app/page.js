@@ -170,6 +170,7 @@ export default function Home() {
             </a>
           </div>
         </section>
+
         <section className="container mx-auto px-6 py-16" id="about">
           <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-gray-200">
             🚀 About Me
@@ -181,7 +182,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-              I’m{" "}
+              I&apos;m{" "}
               <span className="text-indigo-600 dark:text-indigo-400">
                 Behabtu Getnet Walle
               </span>
@@ -198,7 +199,7 @@ export default function Home() {
               <span className="text-indigo-600 dark:text-indigo-400">
                 Docker and Kafka
               </span>
-              . I hold a Bachelor’s in{" "}
+              . I hold a Bachelor&apos;s in{" "}
               <span className="font-semibold">
                 Electrical and Computer Engineering
               </span>{" "}
@@ -342,7 +343,7 @@ export default function Home() {
           </h2>
           <div className="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-lg text-center max-w-2xl mx-auto">
             <p className="text-lg text-gray-700 dark:text-gray-300 italic">
-              "{testimonials[currentTestimonial].text}"
+              &quot;{testimonials[currentTestimonial].text}&quot;
             </p>
             <p className="mt-4 font-semibold text-gray-800 dark:text-gray-200">
               – {testimonials[currentTestimonial].name}

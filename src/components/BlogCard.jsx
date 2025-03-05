@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import Image from "next/image";
 
-const BlogCard = ({ title, description, image, link, date }) => {
+const BlogCard = ({ title, description, image, date }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -11,9 +12,15 @@ const BlogCard = ({ title, description, image, link, date }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.05 }} // Added whileHover
+      whileHover={{ scale: 1.05 }}
     >
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
+      <Image
+        src={image}
+        alt={title}
+        width={400}
+        height={192}
+        className="w-full h-48 object-cover"
+      />
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200">
           {title}

@@ -22,7 +22,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Verify transporter on startup (optional, for debugging)
-transporter.verify((error, success) => {
+transporter.verify((error) => {
   if (error) {
     console.error("Nodemailer verification failed:", error);
   } else {
@@ -30,14 +30,6 @@ transporter.verify((error, success) => {
   }
 });
 
-/**
- * Sends an email with the provided contact form data
- * @param {Object} params - Contact form data
- * @param {string} params.name - Sender's name
- * @param {string} params.email - Sender's email
- * @param {string} params.message - Message content
- * @returns {Promise} - Resolves with email info or rejects with error
- */
 export async function sendEmail({ name, email, message }) {
   // Input validation
   if (!name || !email || !message) {
