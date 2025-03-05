@@ -30,7 +30,7 @@ export default function Home() {
 
   const projects = [
     {
-      title: "Behabtu Blogs",
+      title: "Personal Blogs",
       description:
         "A blog platform hosted on Vercel, built with React.js and Express.js , sharing insights on software development, ERP systems, and real-time data solutions.",
       image: "/images/my-blog.png",
