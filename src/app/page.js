@@ -54,7 +54,7 @@ export default function Home() {
       title: "Amhara Bank Project Management System",
       description:
         "A full-stack MERN application to manage projects, built with React, Node.js, Express.js, and MongoDB for Amhara Bank’s Project Management Office, featuring task tracking, team collaboration, and reporting dashboards.",
-      image: "/images/PMS.png",
+      image: "/images/pms.png",
       link: "#",
     },
     {
