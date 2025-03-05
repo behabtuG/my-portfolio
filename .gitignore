@@ -7,20 +7,33 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-.next # Explicitly ignore the .next directory
-dist
-dist-ssr
+# Node.js and dependencies
+node_modules/
 *.local
 
-# Editor directories and files
+# Next.js build output
+.next/
+dist/
+dist-ssr/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor and OS files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.env
+
+# Build caches
+.cache/
