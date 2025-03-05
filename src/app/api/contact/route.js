@@ -8,11 +8,6 @@ const ERROR_MESSAGES = {
   SERVER_ERROR: "An error occurred. Please try again later.",
 };
 
-/**
- * Handles POST requests to send contact form emails
- * @param {Request} request - Next.js request object
- * @returns {Promise<NextResponse>} - Response with success or error
- */
 export async function POST(request) {
   try {
     // Parse and validate request body
