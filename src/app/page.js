@@ -283,7 +283,7 @@ export default function Home() {
                   className="text-gray-700 dark:text-gray-300 mx-auto"
                 />
                 <h3 className="font-semibold text-lg mt-3 dark:text-gray-200">
-                  MongoDB
+                  Databases
                 </h3>
               </motion.div>
               <motion.div
