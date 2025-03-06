@@ -3,29 +3,10 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { useCallback } from "react";
+import { useState } from "react";
 import { FaUser, FaEnvelope, FaComment } from "react-icons/fa";
 
 const ContactForm = () => {
-  const { executeRecaptcha } = useGoogleReCaptcha();
-
-  // Memoized reCAPTCHA execution to prevent unnecessary re-renders
-  const handleRecaptcha = useCallback(async () => {
-    if (!executeRecaptcha) {
-      console.error("reCAPTCHA not initialized");
-      return null;
-    }
-    try {
-      const token = await executeRecaptcha("contact_form_submit");
-      console.log("reCAPTCHA Token Generated:", token);
-      return token;
-    } catch (error) {
-      console.error("reCAPTCHA Execution Failed:", error);
-      return null;
-    }
-  }, [executeRecaptcha]);
-
   // Enhanced Yup validation schema
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -49,20 +30,13 @@ const ContactForm = () => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      const token = await handleRecaptcha();
-      if (!token) {
-        toast.error("reCAPTCHA verification failed. Please try again.");
-        return;
-      }
-
       try {
         const response = await fetch("/api/contact", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            credential: "true",
           },
-          body: JSON.stringify({ ...values, captcha: token }),
+          body: JSON.stringify(values),
         });
 
         const data = await response.json();
@@ -177,7 +151,7 @@ const ContactForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition duration-200"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-600  transition duration-200"
             disabled={formik.isSubmitting}
           >
             {formik.isSubmitting ? "Sending..." : "Send to Behabtu"}

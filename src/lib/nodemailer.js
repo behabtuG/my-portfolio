@@ -46,7 +46,7 @@ export async function sendEmail({ name, email, message }) {
     from: `"Behabtu's Portfolio" <${EMAIL_CONFIG.AUTH.USER}>`, // Formatted sender
     to: process.env.EMAIL_RECEIVER,
     replyTo: sanitizedEmail, // Allow replies to go to sender
-    subject: "New Contact Form Submission - Behabtu Getnet Walle",
+    subject: "Message Sent from Your Portfolio - Behabtu Getnet Walle",
     text: `
       Name: ${sanitizedName}
       Email: ${sanitizedEmail}
@@ -54,7 +54,7 @@ export async function sendEmail({ name, email, message }) {
       Sent At: ${new Date().toISOString()}
     `,
     html: `
-      <h2>New Contact Form Submission</h2>
+      <h2>Message Sent from Your Portfolio</h2>
       <p><strong>Name:</strong> ${sanitizedName}</p>
       <p><strong>Email:</strong> ${sanitizedEmail}</p>
       <p><strong>Message:</strong> ${sanitizedMessage}</p>

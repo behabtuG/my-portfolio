@@ -1,38 +1,31 @@
 import { NextResponse } from "next/server";
 import { sendEmail } from "@/lib/nodemailer";
+import { rateLimit } from "@/lib/rateLimiter";
 
 // Constants for error messages
 const ERROR_MESSAGES = {
   BAD_REQUEST: "Invalid request data",
-  RECAPTCHA_FAILED: "reCAPTCHA verification failed",
   SERVER_ERROR: "An error occurred. Please try again later.",
 };
 
 export async function POST(request) {
   try {
-    // Parse and validate request body
-    const body = await request.json();
-    const { name, email, message, captcha } = body;
-
-    if (!name || !email || !message || !captcha) {
+    // Apply rate limiting
+    const rateLimitResponse = rateLimit(request);
+    if (rateLimitResponse) {
       return NextResponse.json(
-        { error: ERROR_MESSAGES.BAD_REQUEST },
-        { status: 400 }
+        { error: rateLimitResponse.error },
+        { status: rateLimitResponse.status }
       );
     }
 
-    // Verify reCAPTCHA token
-    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captcha}`;
-    const recaptchaResponse = await fetch(verifyUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    });
-    const recaptchaData = await recaptchaResponse.json();
+    // Parse and validate request body
+    const body = await request.json();
+    const { name, email, message } = body;
 
-    if (!recaptchaData.success || recaptchaData.score < 0.5) {
-      console.warn("reCAPTCHA verification failed:", recaptchaData);
+    if (!name || !email || !message) {
       return NextResponse.json(
-        { error: ERROR_MESSAGES.RECAPTCHA_FAILED, details: recaptchaData },
+        { error: ERROR_MESSAGES.BAD_REQUEST },
         { status: 400 }
       );
     }
