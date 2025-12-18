@@ -186,8 +186,8 @@ export default function Home() {
               <span className="text-indigo-600 dark:text-indigo-400">
                 Behabtu Getnet Walle
               </span>
-              , a <span className="font-bold">Software Engineer</span> at Amhara
-              Bank
+              , a <span className="font-bold">Senior Software Developer</span> at Global
+              Bank Ethiopia
             </h3>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               With <span className="font-semibold">8 years of experience</span>{" "}
